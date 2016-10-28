@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.server-new-owner" author="saturn">
+        <validCheckSum>any</validCheckSum>
+        <sql>
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh4545fd', '0013A20040F9C1D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh4554fd', '0013A20040F9C2D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdf45454fd', '0013A20040F9C3D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh4554fd', '0013A20040F9C4D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh5454fd', '0013A20040F9C5D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh4554fd', '0013A20040F9C6D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh4554fd', '0013A20040F9C7D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh4554fd', '0013A20040F9C8D1');
+            insert into owner (LASTNAME, FIRSTNAME, MIDDLENAME, PASSPORT, DRIVELICENSE, ID) values ('Ivanov', 'Ivan', 'Ivanovich', '9696112233', 'hdfh4544fd', '0013A20040F9C9D1');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

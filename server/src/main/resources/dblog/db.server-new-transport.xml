@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.server-new-transport" author="saturn">
+        <validCheckSum>any</validCheckSum>
+        <sql>
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b105dv70', '0013A20040F9B0F8' , '0013A20040F9C1D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b104dv70', '0013A20040F9B1F8' , '0013A20040F9C2D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b103dv70', '0013A20040F9B2F8' , '0013A20040F9C2D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('truck', '02', 'kamaz', 'b102dv70', '0013A20040F9B3F8' , '0013A20040F9C3D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b101dv70', '0013A20040F9B4F8' , '0013A20040F9C4D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b100dv70', '0013A20040F9B5F8' , '0013A20040F9C4D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b111dv70', '0013A20040F9B6F8' , '0013A20040F9C5D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b114dv70', '0013A20040F9B7F8' , '0013A20040F9C6D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b115dv70', '0013A20040F9B8F8' , '0013A20040F9C7D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b115dv70', '0013A20040F9B9F8' , '0013A20040F9C8D1');
+            insert into transport (TYPE, MODEL, BRAND, STATENUMBER, ID, OWNER_ID) values ('auto', '2106', 'lada', 'b115dv70', '0013A20040F9B0F9' , '0013A20040F9C9D1');
+        </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,48 @@
+Index: server/src/main/java/jd/toll/server/pages/ViewPage.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage.html	(date 1477018117000)
++++ server/src/main/java/jd/toll/server/pages/ViewPage.html	(revision )
+@@ -12,6 +12,8 @@
+ <p>
+ <div wicket:id="tabs" class="tabpanel">[tabbed panel will be here]</div>
+ </p>
+-
++<p>
++    <input wicket:id="button1" type="submit" value="default wicket button" />
++</p>
+ </body>
+ </html>
+Index: server/src/main/java/jd/toll/server/pages/ViewPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage.java	(date 1477018117000)
++++ server/src/main/java/jd/toll/server/pages/ViewPage.java	(revision )
+@@ -2,6 +2,7 @@
+ 
+ import org.apache.wicket.AttributeModifier;
+ import org.apache.wicket.markup.html.WebPage;
++import org.apache.wicket.markup.html.form.Button;
+ import org.apache.wicket.markup.html.form.TextField;
+ import org.apache.wicket.markup.html.panel.Panel;
+ import org.apache.wicket.model.Model;
+@@ -46,6 +47,15 @@
+         final TabbedPanel<ITab> tabbedPanel = new TabbedPanel<ITab>("tabs", tabs);
+         tabbedPanel.add(AttributeModifier.replace("class", ViewPage.this.getDefaultModel()));
+         add(tabbedPanel);
++        Button button1 = new Button("button1")
++        {
++            @Override
++            public void onSubmit()
++            {
++                info("submit.onSubmit executed");
++            }
++        };
++        add(button1);
+     }
+ 
+     private static class TabPanel1 extends Panel

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.server-owner" author="saturn">
+        <validCheckSum>any</validCheckSum>
+        <sql>
+            CREATE TABLE OWNER
+            (
+            ID VARCHAR(16) PRIMARY KEY NOT NULL,
+            LASTNAME VARCHAR(100) NOT NULL,
+            FIRSTNAME VARCHAR(100) NOT NULL,
+            MIDDLENAME VARCHAR(100) NOT NULL,
+            PASSPORT VARCHAR(10) NOT NULL,
+            DRIVELICENSE VARCHAR(10)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

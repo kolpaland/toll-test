@@ -1,0 +1,218 @@
+Index: server/src/main/java/jd/toll/server/pages/AdminPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/AdminPage.java	(revision )
++++ server/src/main/java/jd/toll/server/pages/AdminPage.java	(revision )
+@@ -0,0 +1,9 @@
++package jd.toll.server.pages;
++
++import org.apache.wicket.markup.html.WebPage;
++
++/**
++ * Created by cisco on 20.10.2016.
++ */
++public class AdminPage extends Home {
++}
+Index: server/src/main/java/jd/toll/server/pages/ViewPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage.java	(revision )
++++ server/src/main/java/jd/toll/server/pages/ViewPage.java	(revision )
+@@ -0,0 +1,9 @@
++package jd.toll.server.pages;
++
++import org.apache.wicket.markup.html.WebPage;
++
++/**
++ * Created by cisco on 20.10.2016.
++ */
++public class ViewPage extends WebPage {
++}
+Index: server/src/main/resources/spring-security.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/resources/spring-security.xml	(revision 44edb622ab079f15fa969f11c35711b111cc6780)
++++ server/src/main/resources/spring-security.xml	(revision )
+@@ -8,6 +8,10 @@
+         <remember-me />
+         <intercept-url pattern="/" access="permitAll" />
+         <intercept-url pattern="/login" access="permitAll" />
++        <intercept-url pattern="/logout" access="permitAll" />
++        <intercept-url pattern="/transport/admin" access="hasRole('supervisor')" />
++        <intercept-url pattern="/transport/view" access="permitAll" />
++        <intercept-url pattern="/transport/history" access="hasRole('teller')" />
+ 
+         <intercept-url pattern="/extender/**" access="isAuthenticated()" />
+         <intercept-url pattern="/any/**" access="permitAll" />
+@@ -20,11 +24,15 @@
+         <intercept-url pattern="/**" access="denyAll" />
+         <!-- the login page is a wicket page mounted in WicketApplication.init() -->
+         <form-login login-page="/login" />
++        <logout logout-url="/logout"/>
+     </http>
+     <authentication-manager alias="authenticationManager">
+         <authentication-provider>
+             <user-service>
+                 <user name="viewer" password="opal" authorities="supervisor, teller, user" />
++                <user name="admin" password="admin" authorities="supervisor, teller, user" />
++                <user name="operator" password="operator" authorities="user" />
++                <user name="manager" password="manager" authorities="teller, user" />
+             </user-service>
+         </authentication-provider>
+     </authentication-manager>
+\ No newline at end of file
+Index: server/src/test/java/jd/toll/server/pages/PagesTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/test/java/jd/toll/server/pages/PagesTest.java	(revision 44edb622ab079f15fa969f11c35711b111cc6780)
++++ server/src/test/java/jd/toll/server/pages/PagesTest.java	(revision )
+@@ -48,4 +48,22 @@
+         tester.assertRenderedPage(HomeExtender.class);
+     }
+ 
++    @Test
++    public void historyPageTest() throws Exception {
++        tester.startPage(HistoryPage.class);
++        tester.assertRenderedPage(HistoryPage.class);
++    }
++
++    @Test
++    public void viewPageTest() throws Exception {
++        tester.startPage(ViewPage.class);
++        tester.assertRenderedPage(ViewPage.class);
++    }
++
++    @Test
++    public void adminPageTest() throws Exception {
++        tester.startPage(AdminPage.class);
++        tester.assertRenderedPage(AdminPage.class);
++    }
++
+ }
+\ No newline at end of file
+Index: server/src/main/java/jd/toll/server/pages/HistoryPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/HistoryPage.java	(revision )
++++ server/src/main/java/jd/toll/server/pages/HistoryPage.java	(revision )
+@@ -0,0 +1,9 @@
++package jd.toll.server.pages;
++
++import org.apache.wicket.markup.html.WebPage;
++
++/**
++ * Created by cisco on 20.10.2016.
++ */
++public class HistoryPage extends WebPage{
++}
+Index: server/src/main/java/jd/toll/server/pages/Home.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/Home.html	(revision 44edb622ab079f15fa969f11c35711b111cc6780)
++++ server/src/main/java/jd/toll/server/pages/Home.html	(revision )
+@@ -8,8 +8,11 @@
+ 
+ 
+ <h1><span>Hello!!!!!!</span></h1>
+-
+ <h2><span wicket:id="label"/></h2>
++<p>
++    <wicket:link><a href = "/logout">Click this link to logout</a></wicket:link>
++</p>
++
+ <wicket:child/>
+ </body>
+ </html>
+Index: server/src/main/java/jd/toll/server/pages/HistoryPage.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/HistoryPage.html	(revision )
++++ server/src/main/java/jd/toll/server/pages/HistoryPage.html	(revision )
+@@ -0,0 +1,13 @@
++<html xmlns:wicket="http://wicket.apache.org">
++<head>
++    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
++    <title>Hello, history!!!!!!!!!!!!!</title>
++    <link rel="stylesheet" type="text/css" href="style.css"/>
++</head>
++<body>
++
++
++<h1><span>Hello history!!!!!!</span></h1>
++
++</body>
++</html>
+Index: server/src/main/java/jd/toll/server/pages/AdminPage.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/AdminPage.html	(revision )
++++ server/src/main/java/jd/toll/server/pages/AdminPage.html	(revision )
+@@ -0,0 +1,3 @@
++<wicket:extend xmlns:wicket="http://wicket.apache.org">
++    <h1><span>Hello, Admin!!!!!!</span></h1>
++</wicket:extend>
+Index: server/src/main/java/jd/toll/server/WicketApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/WicketApplication.java	(revision 44edb622ab079f15fa969f11c35711b111cc6780)
++++ server/src/main/java/jd/toll/server/WicketApplication.java	(revision )
+@@ -1,9 +1,6 @@
+ package jd.toll.server;
+ 
+-import jd.toll.server.pages.Home;
+-import jd.toll.server.pages.HomeExtender;
+-import jd.toll.server.pages.LoginPage;
+-import jd.toll.server.pages.SecureWebSession;
++import jd.toll.server.pages.*;
+ import org.apache.wicket.Page;
+ import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;
+ import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
+@@ -31,6 +28,9 @@
+         getComponentInstantiationListeners().add(new SpringComponentInjector(this));
+         mountPage("/extender", HomeExtender.class);
+         mountPage("/login", LoginPage.class);
++        mountPage("/transport/admin", AdminPage.class);
++        mountPage("/transport/history", HistoryPage.class);
++        mountPage("/transport/view", ViewPage.class);
+     }
+ 
+     @Override
+Index: server/src/main/java/jd/toll/server/pages/ViewPage.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage.html	(revision )
++++ server/src/main/java/jd/toll/server/pages/ViewPage.html	(revision )
+@@ -0,0 +1,13 @@
++<html xmlns:wicket="http://wicket.apache.org">
++<head>
++    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
++    <title>Hello, View!!!!!!!!!!!!!</title>
++    <link rel="stylesheet" type="text/css" href="style.css"/>
++</head>
++<body>
++
++
++<h1><span>Hello view!!!!!!</span></h1>
++
++</body>
++</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+    <changeSet id="db.server-transport" author="saturn">
+        <validCheckSum>any</validCheckSum>
+        <sql>
+            CREATE TABLE TRANSPORT
+            (
+            TYPE VARCHAR(20) NOT NULL,
+            MODEL VARCHAR(40) NOT NULL,
+            BRAND VARCHAR(40) NOT NULL,
+            STATENUMBER VARCHAR(20) NOT NULL,
+            ID VARCHAR(16) PRIMARY KEY NOT NULL,
+            OWNER_ID VARCHAR(16) NOT NULL,
+            CONSTRAINT TRANSPORT_OWNER_ID_FK FOREIGN KEY (OWNER_ID) REFERENCES OWNER (ID)
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>

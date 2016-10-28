@@ -1,0 +1,319 @@
+Index: server/src/main/java/jd/toll/server/pages/RegistrationData.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/RegistrationData.java	(revision )
++++ server/src/main/java/jd/toll/server/pages/RegistrationData.java	(revision )
+@@ -0,0 +1,7 @@
++package jd.toll.server.pages;
++
++/**
++ * Created by cisco on 21.10.2016.
++ */
++public class RegistrationData {
++}
+Index: server/src/main/java/jd/toll/server/pages/DataProvider.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/DataProvider.java	(revision )
++++ server/src/main/java/jd/toll/server/pages/DataProvider.java	(revision )
+@@ -0,0 +1,31 @@
++package jd.toll.server.pages;
++
++import org.apache.wicket.markup.repeater.data.IDataProvider;
++import org.apache.wicket.model.IModel;
++
++import java.util.Iterator;
++
++/**
++ * Created by cisco on 21.10.2016.
++ */
++public class DataProvider implements IDataProvider<RegistrationData> {
++    @Override
++    public Iterator<? extends RegistrationData> iterator(long first, long count) {
++        return null;
++    }
++
++    @Override
++    public long size() {
++        return 0;
++    }
++
++    @Override
++    public IModel<RegistrationData> model(RegistrationData object) {
++        return null;
++    }
++
++    @Override
++    public void detach() {
++
++    }
++}
+Index: server/src/main/java/jd/toll/server/pages/ViewPage$TabPanel1.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage$TabPanel1.html	(revision )
++++ server/src/main/java/jd/toll/server/pages/ViewPage$TabPanel1.html	(revision )
+@@ -0,0 +1,23 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
++<wicket:panel>
++<br/>
++This is tab-panel 1
++    <br/>
++    <label>Тип автомобиля</label>
++    <br/>
++    <input wicket:id="carTypeProperty" id="carTypeProperty" type="text" size="32"/>
++    <br/>
++    <label>Марка</label>
++    <br/>
++    <input wicket:id="brendProperty" id="brendProperty" type="text" size="32" maxlength="30" />
++    <br/>
++    <label>Модель</label>
++    <br/>
++    <input wicket:id="modelProperty" id="modelProperty" type="text" size="32" maxlength="10" />
++    <br/>
++    <label>Гос. номер</label>
++    <br/>
++    <input wicket:id="numberProperty" id="numberProperty" type="text" size="32" maxlength="10" />
++</wicket:panel>
++</html>
+Index: server/src/main/java/jd/toll/server/pages/ViewPage$TabPanel2.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage$TabPanel2.html	(revision )
++++ server/src/main/java/jd/toll/server/pages/ViewPage$TabPanel2.html	(revision )
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
++<wicket:panel>
++<br/>
++This is tab-panel 2
++    <br/>
++    <label>ФИО</label>
++    <br/>
++    <input wicket:id="stringProperty" id="stringProperty" type="text" size="40"/>
++    <br/>
++    <label>паспорт</label>
++    <br/>
++    <input wicket:id="integerProperty" id="integerProperty" type="text" size="12" maxlength="10" />
++
++
++</wicket:panel>
++</html>
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- build.gradle	(date 1476930652000)
++++ build.gradle	(revision )
+@@ -61,6 +61,9 @@
+         compile group: 'org.apache.wicket', name: 'wicket-core', version: '6.20.0'
+         compile 'org.apache.wicket:wicket-auth-roles:6.20.0'
+         compile 'org.apache.wicket:wicket-spring:6.20.0'
++        // https://mvnrepository.com/artifact/org.apache.wicket/wicket-extensions
++        compile group: 'org.apache.wicket', name: 'wicket-extensions', version: '6.20.0'
++
+         // https://mvnrepository.com/artifact/org.springframework/spring-web
+         compile group: 'org.springframework', name: 'spring-web', version: "$springVersion"
+         compile "org.springframework.security:spring-security-web:$springVersion"
+Index: server/src/main/java/jd/toll/server/pages/HistoryPage.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/HistoryPage.html	(date 1476930652000)
++++ server/src/main/java/jd/toll/server/pages/HistoryPage.html	(revision )
+@@ -9,5 +9,22 @@
+ 
+ <h1><span>Hello history!!!!!!</span></h1>
+ 
++<table cellspacing="0" class="dataview">
++    <tr>
++        <th>ID</th>
++        <th>First Name</th>
++        <th>Last Name</th>
++        <th>Home Phone</th>
++        <th>Cell Phone</th>
++    </tr>
++    <tr wicket:id="simple">
++        <td><span wicket:id="contactid">[contactid]</span> </td>
++        <td><span wicket:id="firstname">[firstname]</span></td>
++        <td><span wicket:id="lastname">[lastname]</span></td>
++        <td><span wicket:id="homephone">[homephone]</span></td>
++        <td><span wicket:id="cellphone">[cellphone]</span></td>
++    </tr>
++</table>
++
+ </body>
+ </html>
+Index: server/src/main/java/jd/toll/server/pages/ViewPage.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage.html	(date 1476930652000)
++++ server/src/main/java/jd/toll/server/pages/ViewPage.html	(revision )
+@@ -9,5 +9,9 @@
+ 
+ <h1><span>Hello view!!!!!!</span></h1>
+ 
++<p>
++<div wicket:id="tabs" class="tabpanel">[tabbed panel will be here]</div>
++</p>
++
+ </body>
+ </html>
+Index: server/src/main/resources/spring-security.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/resources/spring-security.xml	(date 1476930652000)
++++ server/src/main/resources/spring-security.xml	(revision )
+@@ -12,7 +12,6 @@
+         <intercept-url pattern="/transport/admin" access="hasRole('supervisor')" />
+         <intercept-url pattern="/transport/view" access="permitAll" />
+         <intercept-url pattern="/transport/history" access="hasRole('teller')" />
+-
+         <intercept-url pattern="/extender/**" access="isAuthenticated()" />
+         <intercept-url pattern="/any/**" access="permitAll" />
+         <intercept-url pattern="/**/*.png" access="permitAll" />
+\ No newline at end of file
+Index: server/src/main/java/jd/toll/server/pages/HistoryPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/HistoryPage.java	(date 1476930652000)
++++ server/src/main/java/jd/toll/server/pages/HistoryPage.java	(revision )
+@@ -1,9 +1,40 @@
+ package jd.toll.server.pages;
+ 
++import org.apache.wicket.AttributeModifier;
+ import org.apache.wicket.markup.html.WebPage;
++import org.apache.wicket.markup.html.basic.Label;
++import org.apache.wicket.markup.repeater.Item;
++import org.apache.wicket.markup.repeater.data.DataView;
++import org.apache.wicket.model.AbstractReadOnlyModel;
+ 
+ /**
+  * Created by cisco on 20.10.2016.
+  */
+ public class HistoryPage extends WebPage{
++    public HistoryPage() {
++        add(new DataView<RegistrationData>("simple", new DataProvider())
++        {
++            @Override
++            protected void populateItem(final Item<RegistrationData> item)
++            {
++                RegistrationData contact = item.getModelObject();
++                item.add(new Label("contactid", "test")); //String.valueOf(contact.getId())));
++                item.add(new Label("firstname", "test")); //contact.getFirstName()));
++                item.add(new Label("lastname", "test" ));//contact.getLastName()));
++                item.add(new Label("homephone", "test"));//contact.getHomePhone()));
++                item.add(new Label("cellphone", "test"));//contact.getCellPhone()));
++
++                item.add(AttributeModifier.replace("class", new AbstractReadOnlyModel<String>()
++                {
++                    private static final long serialVersionUID = 1L;
++
++                    @Override
++                    public String getObject()
++                    {
++                        return (item.getIndex() % 2 == 1) ? "even" : "odd";
++                    }
++                }));
++            }
++        });
++    }
+ }
+Index: server/src/main/java/jd/toll/server/pages/ViewPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server/src/main/java/jd/toll/server/pages/ViewPage.java	(date 1476930652000)
++++ server/src/main/java/jd/toll/server/pages/ViewPage.java	(revision )
+@@ -1,9 +1,73 @@
+ package jd.toll.server.pages;
+ 
++import org.apache.wicket.AttributeModifier;
+ import org.apache.wicket.markup.html.WebPage;
++import org.apache.wicket.markup.html.form.TextField;
++import org.apache.wicket.markup.html.panel.Panel;
++import org.apache.wicket.model.Model;
++import org.apache.wicket.extensions.markup.html.tabs.AbstractTab;
++import org.apache.wicket.extensions.markup.html.tabs.ITab;
++import org.apache.wicket.extensions.markup.html.tabs.TabbedPanel;
++import org.apache.wicket.util.lang.Numbers;
++import org.apache.wicket.validation.validator.RangeValidator;
+ 
++import java.util.ArrayList;
++import java.util.List;
++
+ /**
+  * Created by cisco on 20.10.2016.
+  */
+ public class ViewPage extends WebPage {
++    public ViewPage() {
++        // create a list of ITab objects used to feed the tabbed panel
++        final List<ITab> tabs = new ArrayList<ITab>();
++        tabs.add(new AbstractTab(new Model<String>("first tab"))
++        {
++            @Override
++            public Panel getPanel(String panelId)
++            {
++                return new TabPanel1(panelId);
++            }
++
++        });
++
++        tabs.add(new AbstractTab(new Model<String>("second tab"))
++        {
++            @Override
++            public Panel getPanel(String panelId)
++            {
++                return new TabPanel2(panelId);
++            }
++
++        });
++
++        // add the new tabbed panel, attribute modifier only used to switch
++        // between different css variations
++        final TabbedPanel<ITab> tabbedPanel = new TabbedPanel<ITab>("tabs", tabs);
++        tabbedPanel.add(AttributeModifier.replace("class", ViewPage.this.getDefaultModel()));
++        add(tabbedPanel);
++    }
++
++    private static class TabPanel1 extends Panel
++    {
++        public TabPanel1(String id)
++        {
++            super(id);
++            add(new TextField<String>("carTypeProperty").setRequired(true));
++            add(new TextField<String>("brendProperty").setRequired(true));
++            add(new TextField<String>("modelProperty").setRequired(true));
++            add(new TextField<String>("numberProperty").setRequired(true));
++
++        }
++    }
++
++    private static class TabPanel2 extends Panel
++    {
++        public TabPanel2(String id)
++        {
++            super(id);
++            add(new TextField<String>("stringProperty").setRequired(true));
++            add(new TextField<Numbers>("integerProperty").setRequired(true));
++        }
++    }
+ }
